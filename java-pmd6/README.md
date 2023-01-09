@@ -1,7 +1,9 @@
 # Sonar PMD custom plugin for Java
 
 This SonarQube plugin enables adding custom PMD rules for Java. 
-PMD version 6.x.
+This project is sponsored by [Rabobank](https://www.rabobank.com/).
+ 
+For PMD version 6.x.
 
 ## How to add your own custom pmd rules
 

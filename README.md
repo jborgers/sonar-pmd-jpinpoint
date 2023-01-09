@@ -1,6 +1,8 @@
 # Sonar PMD custom plugins for Java and Kotlin
 
-These two SonarQube plugins enable adding custom Java PMD6 rules and custom Kotlin PMD7 rules to SonarQube.
+These two SonarQube plugins enable adding custom Java PMD6 rules and custom Kotlin PMD7 rules to SonarQube. 
+This project is sponsored by [Rabobank](https://www.rabobank.com/).
+
 
 Since current production version of PMD is 6.x, the first plugin supports custom rules for Java using PMD6. 
 
