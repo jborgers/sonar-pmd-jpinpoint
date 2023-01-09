@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jpinpoint.sonar</groupId>
+    <artifactId>sonar-pmd-custom-java</artifactId>
+    <packaging>sonar-plugin</packaging>
+    <version>1.0.0</version>
+
+    <name>Sonar PMD custom rules for Java plugin</name>
+
+    <properties>
+        <!-- read from plugin.properties: propfile.plugin.key and propfile.plugin.description -->
+        <!--suppress UnresolvedMavenProperty -->
+        <plugin.key>${propfile.plugin.key}</plugin.key>
+        <!--suppress UnresolvedMavenProperty -->
+        <plugin.description>${propfile.plugin.description}.</plugin.description>
+
+        <pmd.version>6.53.0</pmd.version>
+        <pmd.inputFileName>pmd-custom-java.xml</pmd.inputFileName>
+        <sonar.outputFileName>sonar-pmd-custom-java.xml</sonar.outputFileName>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <developers>
+        <developer>
+            <name>Jeroen Borgers</name>
+            <email>jborgers@jpinpoint.com</email>
+        </developer>
+        <developer>
+            <name>Peter Paul Bakker</name>
+            <email>peter.paul.bakker@stokpop.nl</email>
+        </developer>
+        <developer>
+            <name>Vincent Oostindie</name>
+            <email>Vincent.Oostindie@rabobank.nl</email>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>9.4.0.54424</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-core</artifactId>
+            <version>${pmd.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-java</artifactId>
+            <version>${pmd.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>5.9.1</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>plugin.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>src/main/resources/com/jpinpoint/pmd/rules</dir>
+                            <includes>
+                                <include>${pmd.inputFileName}</include>
+                            </includes>
+                            <stylesheet>src/main/xslt/create-rules-from-pmd.xsl</stylesheet>
+                            <outputDir>${project.build.directory}/generated-resources/com/jpinpoint/sonar/rules</outputDir>
+                            <outputProperties>
+                                <outputProperty>
+                                    <name>omit-xml-declaration</name>
+                                    <value>yes</value>
+                                </outputProperty>
+                                <outputProperty>
+                                    <name>indent</name>
+                                    <value>yes</value>
+                                </outputProperty>
+                            </outputProperties>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
+                                    <targetName>${sonar.outputFileName}</targetName>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+                <artifactId>sonar-packaging-maven-plugin</artifactId>
+                <version>1.19.0.397</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <pluginClass>com.jpinpoint.sonar.PmdJavaExtensionPlugin</pluginClass>
+                    <basePlugin>pmd</basePlugin>
+                    <pluginName>PMD custom rules for Java</pluginName>
+                    <pluginKey>${plugin.key}</pluginKey>
+                    <pluginDescription>${plugin.description}</pluginDescription>
+                    <pluginUrl>https://github.com/jborgers/sonar-pmd-custom</pluginUrl>
+                    <pluginIssueTrackerUrl>https://github.com/jborgers/sonar-pmd-custom/issues</pluginIssueTrackerUrl>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <formats>
+                                <format>XML</format>
+                            </formats>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${project.build.directory}/generated-resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
+
+</project>

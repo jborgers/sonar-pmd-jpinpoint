@@ -1,0 +1,10 @@
+.idea/
+*.iml
+target/
+rules.sh
+rules.md
+pmd.xml
+pmd-*.xml
+*rules*.xml
+pom.xml.releaseBackup
+release.properties
