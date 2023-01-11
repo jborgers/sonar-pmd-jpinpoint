@@ -12,7 +12,7 @@ Both plugins need the respective PMD plugin installed in SonarQube. So, for supp
 4 Sonar plugins are needed.
 
 ## License
-Sonar-pmd-custom is licensed under the [Apache License, Version 2.0](https://github.com/jborgers/sonar-pmd-custom/blob/master/LICENSE.md).
+Sonar-pmd-custom is licensed under the [Apache License, Version 2.0](https://github.com/jborgers/sonar-pmd-custom/blob/master/LICENSE).
 
 ## How to add your own rules, set plugin description, build and install
 
