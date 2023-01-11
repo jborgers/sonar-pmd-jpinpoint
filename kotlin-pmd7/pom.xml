@@ -22,6 +22,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>https://github.com/jborgers/sonar-pmd-custom/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
     <developers>
         <developer>
             <name>Jeroen Borgers</name>
@@ -62,19 +71,6 @@
             <artifactId>pmd-kotlin</artifactId>
             <version>${pmd.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>junit-bom</artifactId>
-            <version>5.9.1</version>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.9.1</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -122,7 +118,7 @@
                         <transformationSet>
                             <dir>src/main/resources/com/jpinpoint/pmd/rules</dir>
                             <includes>
-                                <include>pmd7-custom-kotlin.xml</include>
+                                <include>${pmd.inputFileName}</include>
                             </includes>
                             <stylesheet>src/main/xslt/create-rules-from-pmd.xsl</stylesheet>
                             <outputDir>${project.build.directory}/generated-resources/com/jpinpoint/sonar/rules</outputDir>
@@ -154,8 +150,11 @@
                 <configuration>
                     <pluginClass>com.jpinpoint.sonar.PmdKotlinExtensionPlugin</pluginClass>
                     <basePlugin>pmd7</basePlugin>
+                    <pluginName>PMD7 custom rules for Kotlin</pluginName>
                     <pluginKey>${plugin.key}</pluginKey>
                     <pluginDescription>${plugin.description}</pluginDescription>
+                    <pluginUrl>https://github.com/jborgers/sonar-pmd-custom</pluginUrl>
+                    <pluginIssueTrackerUrl>https://github.com/jborgers/sonar-pmd-custom/issues</pluginIssueTrackerUrl>
                 </configuration>
             </plugin>
 
@@ -174,32 +173,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <formats>
-                                <format>XML</format>
-                            </formats>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
 
