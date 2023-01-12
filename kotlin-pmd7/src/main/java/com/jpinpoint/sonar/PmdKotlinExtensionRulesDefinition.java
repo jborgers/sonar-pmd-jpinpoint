@@ -16,7 +16,7 @@ public class PmdKotlinExtensionRulesDefinition implements RulesDefinition {
     public void define(Context context) {
         NewRepository repository = context.createRepository("pmd-kotlin", "kotlin").setName("PMD-jPinpoint");
         // see javadoc of RulesDefinitionXmlLoader for the format
-        xmlLoader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/com/jpinpoint/pmd/rules/pmd7-custom-kotlin.xml")));
+        xmlLoader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/com/jpinpoint/sonar/rules/sonar-pmd7-custom-kotlin.xml")));
         repository.done();
     }
 }
