@@ -28,6 +28,10 @@ public class PmdJavaExtensionRulesDefinition implements RulesDefinition {
     @Override
     public void define(Context context) {
         assert(inputReader != null);
+        // we like to make it:
+        // NewRepository repository = context.createRepository("pmd-custom-java", "java").setName("PMD Custom Java");
+        // downside:  it is not compatible with the existing use of @SuppressWarnings("pmd:Rule")
+        // and it needs to be made possible in sonar-pmd
         NewRepository repository = context.createRepository("pmd", "java").setName("PMD");
         // see javadoc of RulesDefinitionXmlLoader for the format
         xmlLoader.load(repository, inputReader);
