@@ -3,7 +3,7 @@
 This Sonar plugin enables adding custom PMD rules for Kotlin. 
 This project is sponsored by [Rabobank](https://www.rabobank.com/).
 
-For PMD version 7.x.
+For PMD version 7.x, SonarQube 9.8+.
 
 ## How to add your own custom pmd rules
 

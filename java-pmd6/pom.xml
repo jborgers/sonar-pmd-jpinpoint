@@ -47,12 +47,14 @@
     </developers>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.sonarsource.api.plugin/sonar-plugin-api -->
         <dependency>
-            <groupId>org.sonarsource.sonarqube</groupId>
+            <groupId>org.sonarsource.api.plugin</groupId>
             <artifactId>sonar-plugin-api</artifactId>
-            <version>9.4.0.54424</version>
+            <version>9.8.0.203</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-core</artifactId>

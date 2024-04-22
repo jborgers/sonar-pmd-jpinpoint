@@ -11,6 +11,8 @@ Since Kotlin is only supported starting with PMD7, the second plugin supports cu
 Both plugins need the respective PMD plugin installed in SonarQube. So, for supporting Java and Kotlin custom rules, 
 4 Sonar plugins are needed.
 
+Supports SonarQube 9.8+.
+
 ## License
 Sonar-pmd-custom is licensed under the [Apache License, Version 2.0](https://github.com/jborgers/sonar-pmd-custom/blob/master/LICENSE).
 
