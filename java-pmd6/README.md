@@ -12,11 +12,19 @@ Add/replace the PMD rules file with name `pmd-custom-java.xml` in `src/main/reso
 ## How to set the plugin description as shown in SonarQube
 In `plugin.properties` replace:
 
+    propfile.plugin.key=pmdcustomjava
+
+with a unique key for your custom rules, like:
+
+    plugin.description=pmdcustomjavajpinpoint
+
+And replace:
+
     plugin.description=Custom PMD rules
 
 with a description of your custom rules, like:
 
-    plugin.description=MyCompany specific Java rules
+    plugin.description=jPinpoint PMD rules for Java
 
 ## How to build and install
 

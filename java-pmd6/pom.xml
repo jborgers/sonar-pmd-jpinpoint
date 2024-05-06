@@ -5,7 +5,7 @@
     <groupId>com.jpinpoint.sonar</groupId>
     <artifactId>sonar-pmd-custom-java</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.0.2-snapshot</version>
+    <version>1.1.0</version>
 
     <name>Sonar PMD custom rules for Java plugin</name>
 
