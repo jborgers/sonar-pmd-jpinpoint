@@ -1,13 +1,13 @@
-# Sonar PMD custom plugin for Kotlin
+# Sonar PMD custom plugin for Java
 
-This Sonar plugin enables adding custom PMD rules for Kotlin. 
+This SonarQube plugin enables adding custom PMD rules for Java. 
 This project is sponsored by [Rabobank](https://www.rabobank.com/).
-
-For PMD version 7.x, SonarQube 9.8+.
+ 
+For PMD version 7.x, SonarQube 9.9.5+.
 
 ## How to add your own custom pmd rules
 
-Add/replace the PMD rules file with name `pmd7-custom-kotlin.xml` in `src/main/resources/com/jpinpoint/pmd/rules/`.
+Add/replace the PMD rules file with name `pmd-custom-java.xml` in `src/main/resources/com/jpinpoint/pmd/rules/`.
 
 ## How to set the plugin description as shown in SonarQube
 In `plugin.properties` replace:
@@ -16,15 +16,15 @@ In `plugin.properties` replace:
 
 with a unique key for your custom rules, like:
 
-    propfile.plugin.key=pmdcustomkotlinjpinpoint
+    propfile.plugin.key=pmdcustomjavajpinpoint
 
 And replace:
 
-    plugin.description=Custom PMD7 Kotlin rules
+    plugin.description=Custom PMD rules
 
 with a description of your custom rules, like:
 
-    plugin.description=MyCompany specific Kotlin rules
+    plugin.description=jPinpoint PMD rules for Java
 
 ## How to build and install
 
@@ -32,17 +32,18 @@ Simply do a:
 
     mvn clean package
 
-and copy the generated JAR (in `target`) to the `extensions/plugins` directory. 
+and copy the generated JAR (in `target`) to the `extensions/plugins` directory of SonarQube. 
 Finally, restart Sonar.
 
-Once Sonar is up and running again, the new rules are available, yet they need activation. 
+Once Sonar is up and running again, the new rules are available, yet they need activation.
 To activate the rules, change the quality profile(s) through the Sonar administration interface.
+
 
 ## How the build works
 
 Apart from the PMD ruleset, a Sonar-specific rule configuration is required. 
-This configuration is generated automatically from the PMD ruleset, using the XSLT `src/main/xslt/create-rules-from-pmd.xsl`. 
-Both the PMD ruleset and the Sonar configuration (`sonar-pmd7-custom-kotlin.xml`) are then bundled into the plugin JAR, together with some minimal bootstrapping code.
+This configuration is generated from the PMD ruleset, using the XSLT `src/main/xslt/create-rules-from-pmd.xsl`. 
+Both the PMD ruleset and the generated Sonar configuration (`sonar-pmd-custom-java.xml`) are then bundled into the plugin JAR, together with some minimal bootstrapping code.
 
 The Java code in this plugin is based on the sample [sonar-pmd-extension-plugin](https://github.com/SonarSource/sonar-examples/tree/master/plugins/sonar-pmd-extension-plugin)
 
@@ -81,7 +82,6 @@ A PMD property to use in the XPath expression can translate to Sonar `param`. Fo
 
     <properties>
         <property name="param-max" value="2" type="String" description="Maximum number of allowed statements"/>
-        <property name="version" value="2.0"/>
         <property name="xpath">
         <value><![CDATA[
             //LambdaExpression[count(.//Statement) > number($param-max)]
