@@ -16,7 +16,7 @@ In `plugin.properties` replace:
 
 with a unique key for your custom rules, like:
 
-    plugin.description=pmdcustomjavajpinpoint
+    propfile.plugin.key=pmdcustomjavajpinpoint
 
 And replace:
 
