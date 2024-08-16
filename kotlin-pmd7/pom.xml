@@ -5,7 +5,7 @@
     <groupId>com.jpinpoint.sonar</groupId>
     <artifactId>sonar-pmd7-custom-kotlin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>Sonar PMD7 custom rules for Kotlin plugin</name>
 
