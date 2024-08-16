@@ -31,7 +31,7 @@ jobs:
       - name: Set Release version env variable
         working-directory: ./java-pmd6
         run: |
-          echo "TAG_NAME=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+          echo "TAG_NAME=$(../mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
       # only build SNAPSHOTS, use release for tagged releases
       - name: Check if tag contains SNAPSHOT
@@ -59,7 +59,7 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
           SKIP_TESTS: ${{ github.event.inputs.skipTests }}
         run: |
-          ./mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) clean deploy
+          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) clean deploy
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
