@@ -1,30 +1,13 @@
-# Sonar PMD custom plugin for Java
+# Sonar PMD jPinpoint plugin for Java
 
-This SonarQube plugin enables adding custom PMD rules for Java. 
+This SonarQube plugin enables adding jPinpoint PMD rules for Java. 
 This project is sponsored by [Rabobank](https://www.rabobank.com/).
  
-For PMD version 6.x, SonarQube 9.8+.
+For PMD version 6.55, SonarQube 9.9.4 - 10.5+.
 
-## How to add your own custom pmd rules
+## How to update the jPinpoint rules
 
-Add/replace the PMD rules file with name `pmd-custom-java.xml` in `src/main/resources/com/jpinpoint/pmd/rules/`.
-
-## How to set the plugin description as shown in SonarQube
-In `plugin.properties` replace:
-
-    propfile.plugin.key=pmdcustomjava
-
-with a unique key for your custom rules, like:
-
-    propfile.plugin.key=pmdcustomjavajpinpoint
-
-And replace:
-
-    plugin.description=Custom PMD rules
-
-with a description of your custom rules, like:
-
-    plugin.description=jPinpoint PMD rules for Java
+Replace the PMD rules file with name `jpinpoint-rules.xml` in `src/main/resources/com/jpinpoint/pmd/rules/`.
 
 ## How to build and install
 
@@ -38,12 +21,11 @@ Finally, restart Sonar.
 Once Sonar is up and running again, the new rules are available, yet they need activation.
 To activate the rules, change the quality profile(s) through the Sonar administration interface.
 
-
 ## How the build works
 
 Apart from the PMD ruleset, a Sonar-specific rule configuration is required. 
 This configuration is generated from the PMD ruleset, using the XSLT `src/main/xslt/create-rules-from-pmd.xsl`. 
-Both the PMD ruleset and the generated Sonar configuration (`sonar-pmd-custom-java.xml`) are then bundled into the plugin JAR, together with some minimal bootstrapping code.
+Both the PMD ruleset and the generated Sonar configuration (`sonar-pmd-jpinpoint.xml`) are then bundled into the plugin JAR, together with some minimal bootstrapping code.
 
 The Java code in this plugin is based on the sample [sonar-pmd-extension-plugin](https://github.com/SonarSource/sonar-examples/tree/master/plugins/sonar-pmd-extension-plugin)
 
@@ -68,13 +50,15 @@ PMD rule priority translates to severity in Sonar:
 | `4`            | `MINOR`          |
 | `5`            | `INFO`           |
 
-Sonar rule elements `type`, `status` and `tag` can be defined as property in PMD properties, example:
+Sonar rule elements `type` and `status` can simply be defined as property in PMD properties. 
+PMD7 does not allow multiple properties with the same name, so `tags` are combined in PMD and translate to separate sonar `tag` rule elements. 
+Example:
 
     <properties>
         <property name="tag" value="jpinpoint-rule" type="String" description="for-sonar"/>
         <property name="type" value="BUG" type="String" description="for-sonar"/>
         <property name="status" value="READY" type="String" description="for-sonar"/>
-        <property name="tag" value="performance" type="String" description="for-sonar"/>
+        <property name="tags" value="performance,sustainability-medium" type="String" description="classification"/>
         <property name="version" value="2.0"/>
         <property name="xpath"><value>...
 

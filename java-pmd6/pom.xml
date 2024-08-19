@@ -7,7 +7,7 @@
     <packaging>sonar-plugin</packaging>
     <version>1.1.2-SNAPSHOT</version>
 
-    <name>Sonar jPinpoint rules for Java plugin</name>
+    <name>Sonar PMD6 jPinpoint rules for Java plugin</name>
 
     <properties>
         <!-- read from plugin.properties: propfile.plugin.key and propfile.plugin.description -->
@@ -17,8 +17,8 @@
         <plugin.description>${propfile.plugin.description}.</plugin.description>
 
         <pmd.version>6.55.0</pmd.version>
-        <pmd.inputFileName>pmd-custom-java.xml</pmd.inputFileName>
-        <sonar.outputFileName>sonar-pmd-custom-java.xml</sonar.outputFileName>
+        <pmd.inputFileName>jpinpoint-rules.xml</pmd.inputFileName>
+        <sonar.outputFileName>sonar-pmd-jpinpoint.xml</sonar.outputFileName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -62,10 +62,6 @@
         <developer>
             <name>Peter Paul Bakker</name>
             <email>peter.paul.bakker@stokpop.nl</email>
-        </developer>
-        <developer>
-            <name>Vincent Oostindie</name>
-            <email>Vincent.Oostindie@rabobank.nl</email>
         </developer>
     </developers>
 

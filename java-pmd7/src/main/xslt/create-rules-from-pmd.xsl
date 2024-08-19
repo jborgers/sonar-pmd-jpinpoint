@@ -18,7 +18,7 @@
                     <name>
                         <xsl:value-of select="@message"/>
                     </name>
-                    <internalKey>com/jpinpoint/pmd/rules/pmd-custom-java.xml/<xsl:value-of select="@name"/>
+                    <internalKey>com/jpinpoint/pmd/rules/jpinpoint-rules-pmd7.xml/<xsl:value-of select="@name"/>
                     </internalKey>
                     <severity>
                         <xsl:choose>

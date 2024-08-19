@@ -1,6 +1,5 @@
 package com.jpinpoint.sonar;
 
-import com.jpinpoint.sonar.PmdJavaExtensionRulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
@@ -14,7 +13,7 @@ class PmdJavaExtensionRulesDefinitionTest {
             "    <rule>\n" +
             "        <key>AvoidApacheCommonsFileItemNonStreaming</key>\n" +
             "        <name>Avoid memory intensive FileItem.get and FileItem.getString</name>\n" +
-            "        <internalKey>nl/rabobank/sonar/performance/pmd-custom-java.xml/AvoidApacheCommonsFileItemNonStreaming</internalKey>\n" +
+            "        <internalKey>nl/rabobank/sonar/performance/jpinpoint-rules.xml/AvoidApacheCommonsFileItemNonStreaming</internalKey>\n" +
             "        <severity>CRITICAL</severity>\n" +
             "        <description>\n" +
             "            <![CDATA[\n" +
@@ -30,7 +29,7 @@ class PmdJavaExtensionRulesDefinitionTest {
             "                        </a>\n" +
             "            ]]>\n" +
             "        </description>\n" +
-            "        <tag>rabo-pinpoint-rule</tag>\n" +
+            "        <tag>jpinpoint-rule</tag>\n" +
             "    </rule>" +
             "</rules>";
 

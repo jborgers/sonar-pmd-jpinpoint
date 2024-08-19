@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpinpoint.sonar</groupId>
-    <artifactId>sonar-pmd7-custom-kotlin</artifactId>
+    <artifactId>sonar-pmd7-jpinpoint-kotlin</artifactId>
     <packaging>sonar-plugin</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>Sonar PMD7 custom rules for Kotlin plugin</name>
+    <name>Sonar PMD7 jPinpoint rules for Kotlin plugin</name>
 
     <properties>
         <!-- read from plugin.properties: propfile.plugin.key and propfile.plugin.description -->
@@ -17,15 +17,15 @@
         <plugin.description>${propfile.plugin.description}.</plugin.description>
 
         <pmd.version>7.0.0-SNAPSHOT</pmd.version>
-        <pmd.inputFileName>pmd7-custom-kotlin.xml</pmd.inputFileName>
-        <sonar.outputFileName>sonar-pmd7-custom-kotlin.xml</sonar.outputFileName>
+        <pmd.inputFileName>pmd7-jpinpoint-kotlin.xml</pmd.inputFileName>
+        <sonar.outputFileName>sonar-pmd7-jpinpoint-kotlin.xml</sonar.outputFileName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <licenses>
         <license>
             <name>Apache-2.0</name>
-            <url>https://github.com/jborgers/sonar-pmd-custom/blob/master/LICENSE</url>
+            <url>https://github.com/jborgers/sonar-pmd-jpinpoint/blob/master/LICENSE</url>
             <distribution>repo</distribution>
             <comments>A business-friendly OSS license</comments>
         </license>
@@ -39,10 +39,6 @@
         <developer>
             <name>Peter Paul Bakker</name>
             <email>peter.paul.bakker@stokpop.nl</email>
-        </developer>
-        <developer>
-            <name>Vincent Oostindie</name>
-            <email>Vincent.Oostindie@rabobank.nl</email>
         </developer>
     </developers>
 
@@ -150,11 +146,11 @@
                 <configuration>
                     <pluginClass>com.jpinpoint.sonar.PmdKotlinExtensionPlugin</pluginClass>
                     <basePlugin>pmd7</basePlugin>
-                    <pluginName>PMD7 custom rules for Kotlin</pluginName>
+                    <pluginName>PMD7 jpinpoint rules for Kotlin</pluginName>
                     <pluginKey>${plugin.key}</pluginKey>
                     <pluginDescription>${plugin.description}</pluginDescription>
-                    <pluginUrl>https://github.com/jborgers/sonar-pmd-custom</pluginUrl>
-                    <pluginIssueTrackerUrl>https://github.com/jborgers/sonar-pmd-custom/issues</pluginIssueTrackerUrl>
+                    <pluginUrl>https://github.com/jborgers/sonar-pmd-jpinpoint</pluginUrl>
+                    <pluginIssueTrackerUrl>https://github.com/jborgers/sonar-pmd-jpinpoint/issues</pluginIssueTrackerUrl>
                 </configuration>
             </plugin>
 

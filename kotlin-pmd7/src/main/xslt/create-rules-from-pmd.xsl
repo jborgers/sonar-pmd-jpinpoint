@@ -1,8 +1,11 @@
 <!--+
     | Creates Sonar rules from a PMD ruleset
     +-->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:pmd="http://pmd.sourceforge.net/ruleset/2.0.0">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:functx="http://www.functx.com" xmlns:pmd="http://pmd.sourceforge.net/ruleset/2.0.0"
+                exclude-result-prefixes="functx">
+    <xsl:import href="https://raw.githubusercontent.com/transpect/xslt-util/master/functx/xsl/functx.xsl"/>
+
     <xsl:output method="xml" omit-xml-declaration="yes" indent="yes"/>
     <xsl:template match="/">
         <rules>
@@ -14,7 +17,7 @@
                     <name>
                         <xsl:value-of select="@message"/>
                     </name>
-                    <internalKey>com/jpinpoint/pmd/rules/pmd7-custom-kotlin.xml/<xsl:value-of select="@name"/>
+                    <internalKey>com/jpinpoint/pmd/rules/jpinpoint-rules-pmd7-kotlin.xml/<xsl:value-of select="@name"/>
                     </internalKey>
                     <severity>
                         <xsl:choose>
@@ -41,6 +44,11 @@
                         </xsl:if>
                         <xsl:if test="@name = 'tag'">
                             <tag><xsl:value-of select="@value"/></tag>
+                        </xsl:if>
+                        <xsl:if test="@name = 'tags'">
+                            <xsl:for-each select="tokenize(@value, ',\s*')">
+                                <tag><xsl:value-of select="."/></tag>
+                            </xsl:for-each>
                         </xsl:if>
                         <xsl:if test="@description">
                             <xsl:if test="starts-with(@name, 'param-')">
