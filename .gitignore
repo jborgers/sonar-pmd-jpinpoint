@@ -3,7 +3,5 @@
 target/
 rules.sh
 rules.md
-pmd*.xml
-*rules*.xml
 pom.xml.releaseBackup
 release.properties
