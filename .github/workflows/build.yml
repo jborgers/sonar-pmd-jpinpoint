@@ -51,15 +51,15 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
 
-      - name: Deploy SNAPSHOT to maven central
-        working-directory: ./java-pmd6
-        env:
-          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
-          SKIP_TESTS: ${{ github.event.inputs.skipTests }}
-        run: |
-          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) clean deploy
+#      - name: Deploy SNAPSHOT to maven central
+#        working-directory: ./java-pmd6
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+#          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
+#          SKIP_TESTS: ${{ github.event.inputs.skipTests }}
+#        run: |
+#          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) clean deploy
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
