@@ -1,9 +1,9 @@
 name: Release to Maven Central
 
 on:
-  push:
-    tags:
-      - '*'
+#  push:
+#    tags:
+#      - '*'
   workflow_dispatch:
 
 defaults:
