@@ -26,8 +26,8 @@ jobs:
 
       - name: Publish package
         working-directory: ./java-pmd6
-        run: ../mvnw -P release --batch-mode deploy -DskipTests
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
+        run: ../mvnw -X -P release --batch-mode deploy -DskipTests
