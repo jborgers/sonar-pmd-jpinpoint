@@ -14,7 +14,6 @@
         <plugin.key>pmdjpinpoint</plugin.key>
         <plugin.name>jPinpoint rules for Java</plugin.name>
         <plugin.description>Rules for performance aware Java programming built on PMD6</plugin.description>
-        <revision>1.1.2-SNAPSHOT</revision>
         <pmd.version>6.55.0</pmd.version>
         <pmd.inputFileName>jpinpoint-rules.xml</pmd.inputFileName>
         <sonar.outputFileName>sonar-pmd-jpinpoint.xml</sonar.outputFileName>
