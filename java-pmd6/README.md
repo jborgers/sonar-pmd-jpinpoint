@@ -55,10 +55,9 @@ PMD7 does not allow multiple properties with the same name, so `tags` are combin
 Example:
 
     <properties>
-        <property name="tag" value="jpinpoint-rule" type="String" description="for-sonar"/>
         <property name="type" value="BUG" type="String" description="for-sonar"/>
         <property name="status" value="READY" type="String" description="for-sonar"/>
-        <property name="tags" value="performance,sustainability-medium" type="String" description="classification"/>
+        <property name="tags" value="jpinpoint-rule,performance,sustainability-medium" type="String" description="classification"/>
         <property name="version" value="2.0"/>
         <property name="xpath"><value>...
 
