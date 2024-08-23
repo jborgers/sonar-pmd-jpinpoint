@@ -33,3 +33,9 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
         run: ../mvnw -P release --batch-mode deploy -DskipTests
+
+      - name: Add jar to release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: java-pmd6/target/sonar-pmd-jpinpoint-*.jar
