@@ -5,7 +5,7 @@
     <groupId>com.jpinpoint.sonar</groupId>
     <artifactId>sonar-pmd-jpinpoint</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>${revision}</version>
+    <version>1.2.0-SNAPSHOT</version>
 
     <name>${plugin.name}</name>
     <description>${plugin.description}</description>
@@ -25,7 +25,7 @@
         <connection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</connection>
         <developerConnection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</developerConnection>
         <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
-        <tag>${revision}</tag>
+        <tag>1.2.0-SNAPSHOT</tag>
     </scm>
     <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
     <issueManagement>
