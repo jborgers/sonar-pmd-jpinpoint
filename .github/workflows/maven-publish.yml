@@ -5,6 +5,11 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
+    # needed to add jar to release
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
