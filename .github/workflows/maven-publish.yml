@@ -31,7 +31,8 @@ jobs:
           ../mvnw versions:set -DnewVersion=${{ github.event.release.tag_name }}
           ../mvnw versions:set-scm-tag -DnewTag=${{ github.event.release.tag_name }}
 
-      - name: Publish package
+      - name: Publish package if not pre-release
+        if: "!github.event.release.prerelease"
         working-directory: ./java-pmd6
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
