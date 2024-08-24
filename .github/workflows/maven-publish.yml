@@ -1,4 +1,4 @@
-name: Publish package to the Maven Central Repository
+name: Create and publish release
 on:
   release:
     types: [created]
@@ -31,14 +31,19 @@ jobs:
           ../mvnw versions:set -DnewVersion=${{ github.event.release.tag_name }}
           ../mvnw versions:set-scm-tag -DnewTag=${{ github.event.release.tag_name }}
 
-      - name: Build and publish package if not pre-release
+      - name: Publish package if not pre-release
+        if: "!github.event.release.prerelease"
         working-directory: ./java-pmd6
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
-          IS_PRE_RELEASE: ${{ github.event.release.prerelease }}
-        run: ../mvnw $(if [ "$IS_PRE_RELEASE" != "true" ]; then echo "-P release"; fi) --batch-mode deploy
+        run: ../mvnw -P release --batch-mode deploy
+
+      - name: Build package if pre-release
+        if: "github.event.release.prerelease"
+        working-directory: ./java-pmd6
+        run: ../mvnw --batch-mode package
 
       - name: Add jar to release
         uses: softprops/action-gh-release@v2
