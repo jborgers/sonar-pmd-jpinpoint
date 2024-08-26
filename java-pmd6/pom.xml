@@ -65,6 +65,10 @@
             <name>Peter Paul Bakker</name>
             <email>peter.paul.bakker@stokpop.nl</email>
         </developer>
+        <developer>
+            <name>Vincent Oostindie</name>
+            <email>Vincent.Oostindie@rabobank.nl</email>
+        </developer>
     </developers>
 
     <dependencies>
