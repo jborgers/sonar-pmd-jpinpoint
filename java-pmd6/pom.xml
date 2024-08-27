@@ -12,10 +12,10 @@
 
     <properties>
         <!--plugin.key>pmdjpinpoint</plugin.key-->
-        <!-- temporary/test: for replacing rabo-pinpoint-rules from rabo plugin whcih seem stuck in a sonar cache -->
+        <!-- temporary/test: for replacing rabo-pinpoint-rules from rabo plugin which seem stuck in a sonar cache -->
         <plugin.key>javaperformancechecks</plugin.key>
         <plugin.name>jPinpoint rules for Java</plugin.name>
-        <plugin.description>Rules for performance aware Java programming built on PMD6</plugin.description>
+        <plugin.description>128 Rules for responsible Java programming built on PMD6, 79 on performance, 63 on sustainability (high/medium/low), 32 on multi-threading, 10 on data mix-up.</plugin.description>
         <pmd.version>6.55.0</pmd.version>
         <pmd.inputFileName>jpinpoint-rules.xml</pmd.inputFileName>
         <sonar.outputFileName>sonar-pmd-jpinpoint.xml</sonar.outputFileName>
