@@ -5,15 +5,13 @@
     <groupId>com.jpinpoint.sonar</groupId>
     <artifactId>sonar-pmd-jpinpoint</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.2.1-SNAPSHOT</version>
 
     <name>${plugin.name}</name>
     <description>${plugin.description}</description>
 
     <properties>
-        <!--plugin.key>pmdjpinpoint</plugin.key-->
-        <!-- temporary/test: for replacing rabo-pinpoint-rules from rabo plugin which seem stuck in a sonar cache -->
-        <plugin.key>javaperformancechecks</plugin.key>
+        <plugin.key>pmdjpinpoint</plugin.key>
         <plugin.name>jPinpoint rules for Java</plugin.name>
         <plugin.description>128 Rules for responsible Java programming built on PMD6, 79 on performance, 63 on sustainability, 32 on multi-threading, 10 on data mix-up.</plugin.description>
         <pmd.version>6.55.0</pmd.version>
@@ -26,7 +24,7 @@
         <connection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</connection>
         <developerConnection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</developerConnection>
         <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
-        <tag>1.3.0-SNAPSHOT</tag>
+        <tag>1.2.1-SNAPSHOT</tag>
     </scm>
     <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
     <issueManagement>
@@ -197,8 +195,8 @@
                     <pluginDescription>${plugin.description}</pluginDescription>
                     <pluginUrl>https://github.com/jborgers/sonar-pmd-jpinpoint</pluginUrl>
                     <pluginIssueTrackerUrl>https://github.com/jborgers/sonar-pmd-jpinpoint/issues</pluginIssueTrackerUrl>
-                    <pluginOrganizationName>jPinpoint B.V.</pluginOrganizationName>
-                    <pluginOrganizationUrl>https://www.jpinpoint.com</pluginOrganizationUrl>
+                    <pluginOrganizationName>jPinpoint, Stokpop and Rabobank</pluginOrganizationName>
+                    <pluginOrganizationUrl>https://github.com/jborgers/PMD-jPinpoint-rules#pmd-jpinpoint-rules</pluginOrganizationUrl>
                     <requiredForLanguages>java</requiredForLanguages>
                     <archive>
                         <manifestEntries>
