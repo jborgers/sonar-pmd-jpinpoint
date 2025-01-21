@@ -10,17 +10,41 @@
     <name>Sonar PMD7 jPinpoint rules for Java plugin</name>
 
     <properties>
-        <!-- read from plugin.properties: propfile.plugin.key and propfile.plugin.description -->
-        <!--suppress UnresolvedMavenProperty -->
-        <plugin.key>${propfile.plugin.key}</plugin.key>
-        <!--suppress UnresolvedMavenProperty -->
-        <plugin.description>${propfile.plugin.description}.</plugin.description>
-
+        <plugin.key>pmdjpinpoint</plugin.key>
+        <plugin.name>jPinpoint rules for Java</plugin.name>
+        <plugin.description>128 Rules for responsible Java programming built on PMD6, 79 on performance, 63 on sustainability, 32 on multi-threading, 10 on data mix-up.</plugin.description>
         <pmd.version>7.9.0</pmd.version>
-        <pmd.inputFileName>jpinpoint-rules-pmd7.xml</pmd.inputFileName>
-        <sonar.outputFileName>sonar-pmd-jpinpoint.xml</sonar.outputFileName>
+        <pmd.inputFileName>jpinpoint-rules.xml</pmd.inputFileName>
+        <sonar.outputFileName>sonar-pmd-jpinpoint-pmd7.xml</sonar.outputFileName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</connection>
+        <developerConnection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</developerConnection>
+        <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
+        <tag>1.2.1-SNAPSHOT</tag>
+    </scm>
+    <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/jborgers/sonar-pmd-jpinpoint/issues</url>
+    </issueManagement>
+    <ciManagement>
+        <system>Travis</system>
+        <url>https://travis-ci.org/jborgers/sonar-pmd-jpinpoint</url>
+    </ciManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>sonatype-nexus</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>sonatype-nexus</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <licenses>
         <license>
@@ -39,6 +63,10 @@
         <developer>
             <name>Peter Paul Bakker</name>
             <email>peter.paul.bakker@stokpop.nl</email>
+        </developer>
+        <developer>
+            <name>Vincent Oostindie</name>
+            <email>Vincent.Oostindie@rabobank.nl</email>
         </developer>
     </developers>
 
@@ -81,28 +109,27 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <executions>
-                    <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <file>plugin.properties</file>
-                            </files>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.1.1</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.2</version>
             </plugin>
 
             <plugin>
@@ -167,10 +194,15 @@
                     <pluginDescription>${plugin.description}</pluginDescription>
                     <pluginUrl>https://github.com/jborgers/sonar-pmd-jpinpoint</pluginUrl>
                     <pluginIssueTrackerUrl>https://github.com/jborgers/sonar-pmd-jpinpoint/issues</pluginIssueTrackerUrl>
+                    <pluginOrganizationName>jPinpoint, Stokpop and Rabobank</pluginOrganizationName>
+                    <pluginOrganizationUrl>https://github.com/jborgers/PMD-jPinpoint-rules#pmd-jpinpoint-rules</pluginOrganizationUrl>
+                    <requiredForLanguages>java</requiredForLanguages>
                     <archive>
                         <manifestEntries>
                             <!-- ${buildNumber} is the svn revision generated by the buildnumber-maven-plugin -->
+                            <!--suppress UnresolvedMavenProperty -->
                             <Implementation-Build>${buildNumber}</Implementation-Build>
+                            <!--suppress UnresolvedMavenProperty -->
                             <Build-Time>${timestamp}</Build-Time>
                             <Plugin-RequiredForLanguages>java</Plugin-RequiredForLanguages>
                         </manifestEntries>
@@ -237,5 +269,77 @@
         </resources>
 
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.5.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <tokenAuth>true</tokenAuth>
+                            <autoPublish>false</autoPublish>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.6.3</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <stylesheet>java</stylesheet>
+                            <doclint>none</doclint>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.4</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
