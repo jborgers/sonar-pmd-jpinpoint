@@ -13,7 +13,7 @@ class PmdJavaExtensionRulesDefinitionTest {
             "    <rule>\n" +
             "        <key>AvoidApacheCommonsFileItemNonStreaming</key>\n" +
             "        <name>Avoid memory intensive FileItem.get and FileItem.getString</name>\n" +
-            "        <internalKey>nl/rabobank/sonar/performance/jpinpoint-rules-pmd7.xml/AvoidApacheCommonsFileItemNonStreaming</internalKey>\n" +
+            "        <internalKey>com/jpinpoint/pmd/rules/jpinpoint-rules.xml/AvoidApacheCommonsFileItemNonStreaming</internalKey>\n" +
             "        <severity>CRITICAL</severity>\n" +
             "        <description>\n" +
             "            <![CDATA[\n" +

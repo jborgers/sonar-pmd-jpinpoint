@@ -18,7 +18,7 @@ public class PmdJavaExtensionRulesDefinition implements RulesDefinition {
 
     public PmdJavaExtensionRulesDefinition(RulesDefinitionXmlLoader xmlLoader) {
         this.xmlLoader = xmlLoader;
-        final InputStream input = getClass().getResourceAsStream("/com/jpinpoint/sonar/rules/sonar-pmd7-jpinpoint.xml");
+        final InputStream input = getClass().getResourceAsStream("/com/jpinpoint/sonar/rules/sonar-pmd-jpinpoint.xml");
         // input may be null if file not there, in unit test
         if (input != null) {
             inputReader = new InputStreamReader(input);
