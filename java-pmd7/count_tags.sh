@@ -1,0 +1,1 @@
+python3 count_tags.py src/main/resources/com/jpinpoint/pmd/rules/jpinpoint-rules.xml
