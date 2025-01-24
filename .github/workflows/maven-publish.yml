@@ -26,14 +26,14 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
 
       - name: Set version
-        working-directory: ./java-pmd6
+        working-directory: ./java-pmd7
         run: |
           ../mvnw versions:set -DnewVersion=${{ github.event.release.tag_name }}
           ../mvnw versions:set-scm-tag -DnewTag=${{ github.event.release.tag_name }}
 
       - name: Publish package if not pre-release
         if: "!github.event.release.prerelease"
-        working-directory: ./java-pmd6
+        working-directory: ./java-pmd7
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
@@ -42,11 +42,11 @@ jobs:
 
       - name: Build package if pre-release
         if: "github.event.release.prerelease"
-        working-directory: ./java-pmd6
+        working-directory: ./java-pmd7
         run: ../mvnw --batch-mode package
 
       - name: Add jar to release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: java-pmd6/target/sonar-pmd-jpinpoint-*.jar
+          files: java-pmd7/target/sonar-pmd-jpinpoint-*.jar

@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set Release version env variable
-        working-directory: ./java-pmd6
+        working-directory: ./java-pmd7
         run: |
           echo "TAG_NAME=$(../mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
@@ -46,8 +46,8 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Build java-pmd6
-        working-directory: ./java-pmd6
+      - name: Build java-pmd7
+        working-directory: ./java-pmd7
         env:
           SKIP_TESTS: ${{ github.event.inputs.skipTests }}
         run: |
@@ -57,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sonar-pmd-jpinpoint-${{ env.TAG_NAME }}.jar
-          path: java-pmd6/target/sonar-pmd-jpinpoint-${{ env.TAG_NAME }}.jar
+          path: java-pmd7/target/sonar-pmd-jpinpoint-${{ env.TAG_NAME }}.jar
