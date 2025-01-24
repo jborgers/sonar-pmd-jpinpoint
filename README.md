@@ -9,8 +9,9 @@ This project is sponsored by [Rabobank](https://www.rabobank.com/).
 
 Rules are on performance, sustainability, multi-threading, data mix-up, and more.
 
-Each plugin need the respective PMD plugin (6 or 7) installed in SonarQube. 
-So, for supporting Java on PMD6 and Kotlin on PMD7 jPinpoint rules, 4 Sonar plugins are needed.
+Each plugin need the respective [Sonar PMD](https://github.com/jborgers/sonar-pmd) plugin (6 or 7) installed in SonarQube. 
+It is not possible for to run PMD6 and PMD7 plugin next to each other. 
+For supporting Java and Kotlin on PMD7 jPinpoint rules, 3 Sonar plugins are needed.
 
 Supports SonarQube version 9.9.4 - 10.8+
 
@@ -19,4 +20,4 @@ sonar-pmd-jpinpoint is licensed under the [Apache License, Version 2.0](https://
 
 ## How to update the jPinpoint rules, build and install
 
-See README in the directory of each of the plugins.
+See [README](./java-pmd7/README.md) in the directory of each of the plugins.
