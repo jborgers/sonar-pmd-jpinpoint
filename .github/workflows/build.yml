@@ -45,13 +45,18 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+          server-id: central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
 
       - name: Build java-pmd7
         working-directory: ./java-pmd7
         env:
           SKIP_TESTS: ${{ github.event.inputs.skipTests }}
         run: |
-          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) package
+          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) clean deploy
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
