@@ -56,7 +56,7 @@ jobs:
         env:
           SKIP_TESTS: ${{ github.event.inputs.skipTests }}
         run: |
-          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) clean deploy
+          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) package
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
