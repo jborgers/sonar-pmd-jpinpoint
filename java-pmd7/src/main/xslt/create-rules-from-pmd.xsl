@@ -37,7 +37,14 @@
                             substring-after($description, 'Solution:'), 'Note:'), 'Exceptions:')"/>
                         <xsl:variable name="note" select="functx:substring-before-if-contains(substring-after($description, 'Note:'), 'Exceptions:')"/>
                         <xsl:variable name="exceptions" select="functx:substring-before-if-contains(substring-after($description, 'Exceptions:'), 'Note:')"/>
-                        <xsl:variable name="example" select="replace(./pmd:example/text(), '^\s+|\s+$', '')"/>
+                        <xsl:variable name="example">
+                            <xsl:for-each select="tokenize(./pmd:example/text(), '\n')">
+                                <xsl:if test="normalize-space(.) != ''">
+                                    <xsl:value-of select="."/>
+                                    <xsl:text>&#10;</xsl:text> <!-- Add the newline back -->
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:variable>
                         <xsl:variable name="link-text" select="functx:substring-after-last(@externalInfoUrl,'/')"/>
 
                         <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
@@ -49,7 +56,7 @@
                         <xsl:if test="$exceptions != ''">
                             <b><xsl:text>Exceptions:</xsl:text></b><xsl:value-of select="$exceptions"/><p/>
                         </xsl:if>
-                        <b>Example:</b><code><pre><xsl:value-of select="$example"/></pre></code>
+                        <b>Example:</b><pre><xsl:value-of select="$example"/></pre>
                         <b><xsl:text>More information: </xsl:text></b><a><xsl:attribute name="href"><xsl:value-of select="@externalInfoUrl"/></xsl:attribute><xsl:value-of select="$link-text"/></a><br/>
                         <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
                     </description>
