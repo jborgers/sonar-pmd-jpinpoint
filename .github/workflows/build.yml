@@ -51,15 +51,23 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
 
-      - name: Build java-pmd7
+      - name: Build java-pmd7 plugin jar
         working-directory: ./java-pmd7
         env:
           SKIP_TESTS: ${{ github.event.inputs.skipTests }}
         run: |
           ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) package
 
-      - name: Upload jar
+      - name: Upload jar to github actions build
         uses: actions/upload-artifact@v4
         with:
           name: sonar-pmd-jpinpoint-${{ env.TAG_NAME }}.jar
           path: java-pmd7/target/sonar-pmd-jpinpoint-${{ env.TAG_NAME }}.jar
+
+      - name: Publish SNAPSHOT to Maven Central
+        working-directory: ./java-pmd7
+        env:
+          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
+        run: ../mvnw -P release --batch-mode deploy
