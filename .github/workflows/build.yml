@@ -15,7 +15,13 @@ on:
       skipTests:
         description: "Skip Tests?"
         required: true
-        default: "no"
+        default: false
+        type: boolean
+      enableDebug:
+        description: "Debug?"
+        required: true
+        default: false
+        type: boolean
 
 defaults:
   run:
@@ -55,8 +61,9 @@ jobs:
         working-directory: ./java-pmd7
         env:
           SKIP_TESTS: ${{ github.event.inputs.skipTests }}
+          ENABLE_DEBUG: ${{ github.event.inputs.enableDebug }}
         run: |
-          ../mvnw --batch-mode $(if [ "$SKIP_TESTS" = "yes" ]; then echo "-DskipTests"; fi) package
+          ../mvnw $(if [ "$ENABLE_DEBUG" == "true" ]; then echo "-X"; fi) --batch-mode $(if [ "$SKIP_TESTS" == "true" ]; then echo "-DskipTests"; fi) package
 
       - name: Upload jar to github actions build
         uses: actions/upload-artifact@v4
@@ -70,4 +77,6 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
-        run: ../mvnw -P release --batch-mode deploy
+          SKIP_TESTS: ${{ github.event.inputs.skipTests }}
+          ENABLE_DEBUG: ${{ github.event.inputs.enableDebug }}
+        run: ../mvnw $(if [ "$ENABLE_DEBUG" == "true" ]; then echo "-X"; fi) $(if [ "$SKIP_TESTS" == "true" ]; then echo "-DskipTests"; fi) -P release --batch-mode deploy
