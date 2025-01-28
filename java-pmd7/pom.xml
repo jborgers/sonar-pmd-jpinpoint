@@ -35,10 +35,14 @@
         <repository>
             <id>sonatype-nexus</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
         </repository>
         <snapshotRepository>
             <id>sonatype-nexus</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases><enabled>false</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
         </snapshotRepository>
     </distributionManagement>
 
@@ -298,7 +302,6 @@
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
-                            <tokenAuth>true</tokenAuth>
                             <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
