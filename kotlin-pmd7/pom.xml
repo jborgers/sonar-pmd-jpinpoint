@@ -16,7 +16,7 @@
         <!--suppress UnresolvedMavenProperty -->
         <plugin.description>${propfile.plugin.description}.</plugin.description>
 
-        <pmd.version>7.0.0-SNAPSHOT</pmd.version>
+        <pmd.version>7.10.0</pmd.version>
         <pmd.inputFileName>pmd7-jpinpoint-kotlin.xml</pmd.inputFileName>
         <sonar.outputFileName>sonar-pmd7-jpinpoint-kotlin.xml</sonar.outputFileName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
