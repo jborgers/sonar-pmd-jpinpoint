@@ -8,6 +8,7 @@
     <version>2.0.0-SNAPSHOT</version>
 
     <name>Sonar PMD7 jPinpoint rules for Java plugin</name>
+    <description>${plugin.description}</description>
 
     <properties>
         <plugin.key>pmdjpinpoint</plugin.key>
