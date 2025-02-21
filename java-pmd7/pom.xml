@@ -31,17 +31,6 @@
         <url>https://github.com/jborgers/sonar-pmd-jpinpoint/issues</url>
     </issueManagement>
 
-    <distributionManagement>
-        <repository>
-            <id>sonatype-nexus</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>sonatype-nexus</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <licenses>
         <license>
             <name>Apache-2.0</name>
@@ -297,8 +286,6 @@
                         <version>0.7.0</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <publishingServerId>central</publishingServerId>
-                            <tokenAuth>true</tokenAuth>
                             <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
