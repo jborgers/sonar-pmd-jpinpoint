@@ -21,3 +21,17 @@ Finally, restart Sonar.
 Once Sonar is up and running again, the new rules are available, yet they need activation.
 To activate the rules, change the quality profile(s) through the Sonar administration interface.
 
+# How to release
+
+* Update the version in the java-pmd7/pom.xml file to the (non-SNAPSHOT) version number.
+* Push all changes.
+* Create a release in GitHub --- this will trigger a build and release in SonarQube.
+  * Type in the new tag name and choose 'create new tag x.y.z on publish'.
+  * Do _not_ check "Set as pre-release"
+  * Check "set as the latest release"
+
+If you first want to release a SNAPSHOT version, you can do so by creating a pre-release in GitHub.
+Create a pre-release in GitHub --- this will _not_ publish the release in SonarQube.
+* Type in the new tag name and choose 'create new tag x.y.z-SNAPSHOT on publish'.
+* Check "Set as pre-release"
+* Do _not_ check "Set as the latest release"
