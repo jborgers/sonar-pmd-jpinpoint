@@ -3,7 +3,7 @@
 This SonarQube plugin enables adding jPinpoint PMD rules for Java. 
 This project is sponsored by [Rabobank](https://www.rabobank.com/).
  
-For PMD version 7.10, SonarQube 9.9.5 - 10.8+.
+For PMD version 7.16, SonarQube 9.9.5 - 10.8+.
 
 ## How to update the jPinpoint rules
 

@@ -13,7 +13,7 @@ Each plugin need the respective [Sonar PMD](https://github.com/jborgers/sonar-pm
 It is not possible for to run PMD6 and PMD7 plugin next to each other. 
 For supporting Java and Kotlin on PMD7 jPinpoint rules, 3 Sonar plugins are needed.
 
-Supports SonarQube version 9.9.4 - 10.8+
+Supports SonarQube version 9.9.5 - 10.8+
 
 ## License
 sonar-pmd-jpinpoint is licensed under the [Apache License, Version 2.0](https://github.com/jborgers/sonar-pmd-jpinpoint/blob/master/LICENSE).
