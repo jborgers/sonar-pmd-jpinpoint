@@ -3,24 +3,33 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpinpoint.sonar</groupId>
-    <artifactId>sonar-pmd7-jpinpoint-kotlin</artifactId>
+    <artifactId>sonar-pmd-jpinpoint-kotlin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.1.2-SNAPSHOT</version>
 
-    <name>Sonar PMD7 jPinpoint rules for Kotlin plugin</name>
+    <name>Sonar PMD jPinpoint rules for Kotlin plugin</name>
 
     <properties>
-        <!-- read from plugin.properties: propfile.plugin.key and propfile.plugin.description -->
-        <!--suppress UnresolvedMavenProperty -->
-        <plugin.key>${propfile.plugin.key}</plugin.key>
-        <!--suppress UnresolvedMavenProperty -->
-        <plugin.description>${propfile.plugin.description}.</plugin.description>
-
-        <pmd.version>7.0.0-SNAPSHOT</pmd.version>
-        <pmd.inputFileName>pmd7-jpinpoint-kotlin.xml</pmd.inputFileName>
-        <sonar.outputFileName>sonar-pmd7-jpinpoint-kotlin.xml</sonar.outputFileName>
+        <plugin.key>pmdjpinpointkotlin</plugin.key>
+        <plugin.name>jPinpoint rules for Kotlin</plugin.name>
+        <plugin.description>13 Rules for responsible Kotlin programming built on PMD7.</plugin.description>
+        <pmd.version>7.17.0</pmd.version>
+        <pmd.inputFileName>jpinpoint-kotlin-rules.xml</pmd.inputFileName>
+        <sonar.outputFileName>sonar-pmd-jpinpoint-kotlin.xml</sonar.outputFileName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</connection>
+        <developerConnection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</developerConnection>
+        <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
+        <tag>2.1.2-SNAPSHOT</tag>
+    </scm>
+    <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/jborgers/sonar-pmd-jpinpoint/issues</url>
+    </issueManagement>
 
     <licenses>
         <license>
@@ -46,19 +55,13 @@
         <dependency>
             <groupId>org.sonarsource.api.plugin</groupId>
             <artifactId>sonar-plugin-api</artifactId>
-            <version>9.8.0.203</version>
+            <version>9.14.0.375</version> <!-- note this determines minimal supported sonar version -->
             <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd -->
         <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-core</artifactId>
-            <version>${pmd.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
-            <artifactId>pmd-java</artifactId>
             <version>${pmd.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -73,34 +76,24 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <executions>
-                    <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <file>plugin.properties</file>
-                            </files>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.3</version>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.3</version>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>xml-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>1.1.0</version>
                 <executions>
                     <execution>
                         <phase>generate-resources</phase>
@@ -136,17 +129,31 @@
                         </transformationSet>
                     </transformationSets>
                 </configuration>
+                <dependencies>
+                    <!-- https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE -->
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <version>12.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.1.1</version>
             </plugin>
 
             <plugin>
                 <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
                 <artifactId>sonar-packaging-maven-plugin</artifactId>
-                <version>1.19.0.397</version>
+                <version>1.23.0.740</version>
                 <extensions>true</extensions>
                 <configuration>
                     <pluginClass>com.jpinpoint.sonar.PmdKotlinExtensionPlugin</pluginClass>
-                    <basePlugin>pmd7</basePlugin>
-                    <pluginName>PMD7 jpinpoint rules for Kotlin</pluginName>
+                    <basePlugin>pmd</basePlugin>
+                    <pluginName>${plugin.name}</pluginName>
                     <pluginKey>${plugin.key}</pluginKey>
                     <pluginDescription>${plugin.description}</pluginDescription>
                     <pluginUrl>https://github.com/jborgers/sonar-pmd-jpinpoint</pluginUrl>
@@ -157,18 +164,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
                 </configuration>
             </plugin>
 
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>3.5.2</version>
             </plugin>
         </plugins>
 

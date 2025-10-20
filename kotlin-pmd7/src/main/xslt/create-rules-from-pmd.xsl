@@ -2,8 +2,8 @@
     | Creates Sonar rules from a PMD ruleset
     +-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:functx="http://www.functx.com" xmlns:pmd="http://pmd.sourceforge.net/ruleset/2.0.0"
-                exclude-result-prefixes="functx">
+        xmlns:functx="http://www.functx.com" xmlns:pmd="http://pmd.sourceforge.net/ruleset/2.0.0"
+        exclude-result-prefixes="functx">
     <xsl:import href="https://raw.githubusercontent.com/transpect/xslt-util/master/functx/xsl/functx.xsl"/>
 
     <xsl:output method="xml" omit-xml-declaration="yes" indent="yes"/>
@@ -17,7 +17,7 @@
                     <name>
                         <xsl:value-of select="@message"/>
                     </name>
-                    <internalKey>com/jpinpoint/pmd/rules/jpinpoint-rules-pmd7-kotlin.xml/<xsl:value-of select="@name"/>
+                    <internalKey>com/jpinpoint/pmd/rules/jpinpoint-rules-kotlin.xml/<xsl:value-of select="@name"/>
                     </internalKey>
                     <severity>
                         <xsl:choose>
@@ -30,9 +30,33 @@
                         </xsl:choose>
                     </severity>
                     <description>
+                        <xsl:variable name="description" select="./pmd:description/text()"/>
+                        <xsl:variable name="problem" select="substring-before(substring-after($description, 'Problem:'), 'Solution:')"/>
+                        <xsl:variable name="solution" select="functx:substring-before-if-contains(functx:substring-before-if-contains(
+                            substring-after($description, 'Solution:'), 'Note:'), 'Exceptions:')"/>
+                        <xsl:variable name="note" select="functx:substring-before-if-contains(substring-after($description, 'Note:'), 'Exceptions:')"/>
+                        <xsl:variable name="exceptions" select="functx:substring-before-if-contains(substring-after($description, 'Exceptions:'), 'Note:')"/>
+                        <xsl:variable name="example">
+                            <xsl:for-each select="tokenize(./pmd:example/text(), '\n')">
+                                <xsl:if test="normalize-space(.) != ''">
+                                    <xsl:value-of select="."/>
+                                    <xsl:text>&#10;</xsl:text> <!-- Add the newline back -->
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:variable>
+                        <xsl:variable name="link-text" select="functx:substring-after-last(@externalInfoUrl,'/')"/>
+
                         <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
-                        <xsl:value-of select="./pmd:description/text()"/><p/>
-                        <xsl:text>More information: </xsl:text><a><xsl:attribute name="href"><xsl:value-of select="@externalInfoUrl"/></xsl:attribute>Documentation</a>
+                        <b><xsl:text>Problem:</xsl:text></b><xsl:value-of select="$problem"/><p/>
+                        <b><xsl:text>Solution:</xsl:text></b><xsl:value-of select="$solution"/><p/>
+                        <xsl:if test="$note != ''">
+                            <b><xsl:text>Note:</xsl:text></b><xsl:value-of select="$note"/><p/>
+                        </xsl:if>
+                        <xsl:if test="$exceptions != ''">
+                            <b><xsl:text>Exceptions:</xsl:text></b><xsl:value-of select="$exceptions"/><p/>
+                        </xsl:if>
+                        <b>Example:</b><pre><xsl:value-of select="$example"/></pre>
+                        <b><xsl:text>More information: </xsl:text></b><a><xsl:attribute name="href"><xsl:value-of select="@externalInfoUrl"/></xsl:attribute><xsl:value-of select="$link-text"/></a><br/>
                         <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
                     </description>
                     <xsl:for-each select="./pmd:properties/pmd:property">
