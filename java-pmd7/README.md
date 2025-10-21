@@ -1,29 +1,31 @@
-# Sonar PMD jPinpoint plugin for Java
+# Sonar PMD jPinpoint plugin for Java and Kotlin
 
 This SonarQube plugin enables adding jPinpoint PMD rules for Java. 
 This project is sponsored by [Rabobank](https://www.rabobank.com/).
  
-For PMD version 7.16, SonarQube 9.9.5 - 10.8+.
+For PMD version 7.17, SonarQube 9.9.5 - 10.8+.
 
 ## How to update the jPinpoint rules
 
-Replace the PMD rules file with name `jpinpoint-rules.xml` in `src/main/resources/com/jpinpoint/pmd/rules/`.
+Replace the PMD rules files with name 
+* `jpinpoint-rules.xml` in `java-pmd7/src/main/resources/com/jpinpoint/pmd/rules/jpinpoint-rules.xml`.
+* `jpinpoint-rules-kotlin.xml` in `kotlin-pmd7/src/main/resources/com/jpinpoint/pmd/rules/jpinpoint-rules-kotlin.xml`.
 
 ## How to build and install
 
 Simply do a:
 
-    mvn clean package
+    ../mvnw clean package
 
-and copy the generated JAR (in `target`) to the `extensions/plugins` directory of SonarQube. 
+in both `java-pmd7` and `kotlin-pmd7` directory and copy the generated jars (in `target`) to the `downloads` directory of SonarQube. 
 Finally, restart Sonar.
 
 Once Sonar is up and running again, the new rules are available, yet they need activation.
-To activate the rules, change the quality profile(s) through the Sonar administration interface.
+Important: to activate the rules, add new rules to quality profile(s) through the Sonar administration interface.
 
 # How to release
 
-* Update the version in the java-pmd7/pom.xml file to the (non-SNAPSHOT) version number.
+* Update the version in the `java-pmd7/pom.xml` and `kotlin-pmd7/pom.xml` file to the (non-SNAPSHOT) version number.
 * Push all changes.
 * Create a release in GitHub --- this will trigger a build and release in SonarQube.
   * Type in the new tag name and choose 'create new tag x.y.z on publish'.

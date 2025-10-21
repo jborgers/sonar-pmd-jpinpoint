@@ -5,7 +5,7 @@
     <groupId>com.jpinpoint.sonar</groupId>
     <artifactId>sonar-pmd-jpinpoint-kotlin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>2.1.2-SNAPSHOT</version>
+    <version>2.2.0-SNAPSHOT</version>
 
     <name>Sonar PMD jPinpoint rules for Kotlin plugin</name>
 
@@ -14,7 +14,7 @@
         <plugin.name>jPinpoint rules for Kotlin</plugin.name>
         <plugin.description>13 Rules for responsible Kotlin programming built on PMD7.</plugin.description>
         <pmd.version>7.17.0</pmd.version>
-        <pmd.inputFileName>jpinpoint-kotlin-rules.xml</pmd.inputFileName>
+        <pmd.inputFileName>jpinpoint-rules-kotlin.xml</pmd.inputFileName>
         <sonar.outputFileName>sonar-pmd-jpinpoint-kotlin.xml</sonar.outputFileName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -52,6 +52,12 @@
     </developers>
 
     <dependencies>
+        <dependency>
+            <groupId>org.sonarsource.pmd</groupId>
+            <artifactId>sonar-pmd-lib</artifactId>
+            <version>4.2.1</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.sonarsource.api.plugin</groupId>
             <artifactId>sonar-plugin-api</artifactId>
@@ -158,6 +164,7 @@
                     <pluginDescription>${plugin.description}</pluginDescription>
                     <pluginUrl>https://github.com/jborgers/sonar-pmd-jpinpoint</pluginUrl>
                     <pluginIssueTrackerUrl>https://github.com/jborgers/sonar-pmd-jpinpoint/issues</pluginIssueTrackerUrl>
+                    <requiredForLanguages>kotlin</requiredForLanguages>
                 </configuration>
             </plugin>
 
