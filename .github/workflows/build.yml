@@ -57,22 +57,43 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
 
-      - name: Build java-pmd7 plugin jar
-        working-directory: ./java-pmd7
+      - name: Build plugin jars
         env:
           SKIP_TESTS: ${{ github.event.inputs.skipTests }}
           ENABLE_DEBUG: ${{ github.event.inputs.enableDebug }}
         run: |
           ../mvnw $(if [ "$ENABLE_DEBUG" == "true" ]; then echo "-X"; fi) --batch-mode $(if [ "$SKIP_TESTS" == "true" ]; then echo "-DskipTests"; fi) package
 
-      - name: Upload jar to github actions build
+      - name: Upload java plugin jar to github actions build
         uses: actions/upload-artifact@v4
         with:
-          name: sonar-pmd-jpinpoint-${{ env.TAG_NAME }}.jar
-          path: java-pmd7/target/sonar-pmd-jpinpoint-${{ env.TAG_NAME }}.jar
+          name: sonar-pmd-jpinpoint-java-${{ env.TAG_NAME }}.jar
+          path: java-pmd7/target/sonar-pmd-jpinpoint-java-${{ env.TAG_NAME }}.jar
+
+      - name: Upload kotlin plugin jar to github actions build
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonar-pmd-jpinpoint-kotlin-${{ env.TAG_NAME }}.jar
+          path: kotlin-pmd7/target/sonar-pmd-jpinpoint-kotlin-${{ env.TAG_NAME }}.jar
+
+      - name: Upload JARs to pre-release
+        uses: softprops/action-gh-release@v1
+        if: github.ref == 'refs/heads/master'
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: Pre-release ${{ env.TAG_NAME }}
+          prerelease: true
+          files: |
+            java-pmd7/target/sonar-pmd-jpinpoint-java-${{ env.TAG_NAME }}.jar
+            kotlin-pmd7/target/sonar-pmd-jpinpoint-kotlin-${{ env.TAG_NAME }}.jar
+          body: |
+            Automated pre-release build for version ${{ env.TAG_NAME }}
+            
+            Built from commit: ${{ github.sha }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish SNAPSHOT to Maven Central
-        working-directory: ./java-pmd7
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
