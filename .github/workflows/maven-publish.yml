@@ -1,7 +1,7 @@
 name: Create and publish release
 on:
   release:
-    types: [created]
+    types: [ published ]
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Maven Central Repository
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -26,27 +26,26 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
 
       - name: Set version
-        working-directory: ./java-pmd7
         run: |
-          ../mvnw versions:set -DnewVersion=${{ github.event.release.tag_name }}
-          ../mvnw versions:set-scm-tag -DnewTag=${{ github.event.release.tag_name }}
+          ./mvnw versions:set -DnewVersion=${{ github.event.release.tag_name }}
+          ./mvnw versions:set-scm-tag -DnewTag=${{ github.event.release.tag_name }}
 
       - name: Publish package if not pre-release
         if: "!github.event.release.prerelease"
-        working-directory: ./java-pmd7
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSWORD }}
-        run: ../mvnw -P release --batch-mode deploy
+        run: ./mvnw -P release --batch-mode deploy
 
       - name: Build package if pre-release
         if: "github.event.release.prerelease"
-        working-directory: ./java-pmd7
-        run: ../mvnw --batch-mode package
+        run: ./mvnw --batch-mode package
 
       - name: Add jar to release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: java-pmd7/target/sonar-pmd-jpinpoint-*.jar
+          files: |
+            java-pmd7/target/sonar-pmd-jpinpoint-java-${{ env.TAG_NAME }}.jar
+            kotlin-pmd7/target/sonar-pmd-jpinpoint-kotlin-${{ env.TAG_NAME }}.jar
