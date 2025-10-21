@@ -1,9 +1,8 @@
 # Sonar PMD jPinpoint plugin for Java and Kotlin
 
-This SonarQube plugin enables adding jPinpoint PMD rules for Java. 
+This SonarQube plugin enables adding jPinpoint PMD rules for Java and Kotlin. 
 This project is sponsored by [Rabobank](https://www.rabobank.com/).
- 
-For PMD version 7.17, SonarQube 9.9.5 - 10.8+.
+
 
 ## How to update the jPinpoint rules
 
@@ -15,9 +14,9 @@ Replace the PMD rules files with name
 
 Simply do a:
 
-    ../mvnw clean package
+    ./mvnw clean package
 
-in both `java-pmd7` and `kotlin-pmd7` directory and copy the generated jars (in `target`) to the `downloads` directory of SonarQube. 
+and copy the generated jars (in `java-pmd7/target` and `kotlin-pmd7/target`) to the `downloads` directory of SonarQube. 
 Finally, restart Sonar.
 
 Once Sonar is up and running again, the new rules are available, yet they need activation.

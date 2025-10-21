@@ -5,7 +5,7 @@
     <groupId>com.jpinpoint.sonar</groupId>
     <artifactId>sonar-pmd-jpinpoint-kotlin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <name>Sonar PMD jPinpoint rules for Kotlin plugin</name>
 
@@ -23,7 +23,7 @@
         <connection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</connection>
         <developerConnection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</developerConnection>
         <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
-        <tag>2.1.2-SNAPSHOT</tag>
+        <tag>${revision}</tag>
     </scm>
     <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
     <issueManagement>
