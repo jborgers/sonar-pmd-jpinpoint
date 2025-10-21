@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpinpoint.sonar</groupId>
-    <artifactId>sonar-pmd-jpinpoint</artifactId>
+    <artifactId>sonar-pmd-jpinpoint-java</artifactId>
     <packaging>sonar-plugin</packaging>
     <version>2.2.0-SNAPSHOT</version>
 
-    <name>Sonar PMD7 jPinpoint rules for Java plugin</name>
+    <name>Sonar PMD jPinpoint rules for Java plugin</name>
     <description>${plugin.description}</description>
 
     <properties>

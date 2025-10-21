@@ -64,7 +64,6 @@
             <version>9.14.0.375</version> <!-- note this determines minimal supported sonar version -->
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd -->
         <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-core</artifactId>

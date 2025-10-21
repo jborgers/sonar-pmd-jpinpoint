@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jpinpoint.sonar</groupId>
+    <artifactId>sonar-pmd-jpinpoint-parent</artifactId>
+    <version>2.2.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Sonar PMD jPinpoint Parent</name>
+    <description>Parent POM aggregating java-pmd7 and kotlin-pmd7 modules</description>
+    <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
+
+    <modules>
+        <module>java-pmd7</module>
+        <module>kotlin-pmd7</module>
+    </modules>
+
+    <scm>
+        <connection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</connection>
+        <developerConnection>scm:git:git@github.com:jborgers/sonar-pmd-jpinpoint.git</developerConnection>
+        <url>https://github.com/jborgers/sonar-pmd-jpinpoint</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>https://github.com/jborgers/sonar-pmd-jpinpoint/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Jeroen Borgers</name>
+            <email>jborgers@jpinpoint.com</email>
+        </developer>
+        <developer>
+            <name>Peter Paul Bakker</name>
+            <email>peter.paul.bakker@stokpop.nl</email>
+        </developer>
+        <developer>
+            <name>Vincent Oostindie</name>
+            <email>Vincent.Oostindie@rabobank.nl</email>
+        </developer>
+    </developers>
+</project>
