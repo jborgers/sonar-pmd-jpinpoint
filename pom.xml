@@ -19,6 +19,7 @@
         <pmd.version>7.17.0</pmd.version>
         <!-- Defaults to satisfy parent resolution; overridden in modules -->
         <pmd.inputFileName>jpinpoint-rules.xml</pmd.inputFileName>
+        <!-- Defaults to satisfy parent resolution; overridden in modules -->
         <sonar.outputFileName>sonar-pmd-jpinpoint.xml</sonar.outputFileName>
     </properties>
 
