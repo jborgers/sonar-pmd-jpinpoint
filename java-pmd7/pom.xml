@@ -18,7 +18,7 @@
         <plugin.key>pmdjpinpoint</plugin.key>
         <plugin.name>jPinpoint rules for Java</plugin.name>
         <plugin.description>134 Rules for responsible Java programming built on PMD7, 83 on performance, 64 on sustainability, 34 on multi-threading, 11 on data mix-up.</plugin.description>
-        <pmd.inputFileName>jpinpoint-rules.xml</pmd.inputFileName>
+        <pmd.inputFileName>jpinpoint-rules-java.xml</pmd.inputFileName>
         <sonar.outputFileName>sonar-pmd-jpinpoint.xml</sonar.outputFileName>
     </properties>
 
