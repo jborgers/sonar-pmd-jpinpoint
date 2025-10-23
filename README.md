@@ -2,7 +2,7 @@
 
 These SonarQube plugins enable adding the [PMD-jPinpoint-rules](https://github.com/jborgers/PMD-jPinpoint-rules) for responsible programming to SonarQube.
 
-Currently there is a Java PMD7 and Kotlin PMD7 plugin. We dropped support for PMD6.
+Currently there is a Java PMD7 and Kotlin PMD7 plugin. We no longer support PMD6.
 
 This project is sponsored by [Rabobank](https://www.rabobank.com/).
 

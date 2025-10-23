@@ -22,7 +22,7 @@ class PmdJavaExtensionRulesDefinitionTest {
             "        (jpinpoint-rules)\n" +
             "            <br/>\n" +
             "            <br/>\n" +
-            "                                    More information:\n" +
+            "                                    Full documentation:\n" +
             "                        \n" +
             "            <a href=\"https://github.com/jborgers/PMD-jPinpoint-rules/tree/master/docs/JavaCodePerformance.md#isio03\">\n" +
             "                            Java Code Performance Details\n" +

@@ -56,7 +56,7 @@
                             <b><xsl:text>Exceptions:</xsl:text></b><xsl:value-of select="$exceptions"/><p/>
                         </xsl:if>
                         <b>Example:</b><pre><xsl:value-of select="$example"/></pre>
-                        <b><xsl:text>More information: </xsl:text></b><a><xsl:attribute name="href"><xsl:value-of select="@externalInfoUrl"/></xsl:attribute><xsl:value-of select="$link-text"/></a><br/>
+                        <b><xsl:text>Full documentation: </xsl:text></b><a><xsl:attribute name="href"><xsl:value-of select="@externalInfoUrl"/></xsl:attribute><xsl:value-of select="$link-text"/></a><br/>
                         <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
                     </description>
                     <xsl:for-each select="./pmd:properties/pmd:property">

@@ -7,7 +7,7 @@ This project is sponsored by [Rabobank](https://www.rabobank.com/).
 ## How to update the jPinpoint rules
 
 Replace the PMD rules files with name 
-* `jpinpoint-rules.xml` in `java-pmd7/src/main/resources/com/jpinpoint/pmd/rules/jpinpoint-rules.xml`.
+* `jpinpoint-rules-java.xml` in `java-pmd7/src/main/resources/com/jpinpoint/pmd/rules/jpinpoint-rules-java.xml`.
 * `jpinpoint-rules-kotlin.xml` in `kotlin-pmd7/src/main/resources/com/jpinpoint/pmd/rules/jpinpoint-rules-kotlin.xml`.
 
 ## How to build and install
