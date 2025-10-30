@@ -1,1 +1,1 @@
-com/jpinpoint/pmd/rules/jpinpoint-rules.xml
+com/jpinpoint/pmd/rules/jpinpoint-rules-java.xml

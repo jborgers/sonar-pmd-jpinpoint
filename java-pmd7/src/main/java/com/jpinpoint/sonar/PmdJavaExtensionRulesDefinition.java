@@ -39,7 +39,7 @@ public class PmdJavaExtensionRulesDefinition implements RulesDefinition {
         // and it needs to be made possible in sonar-pmd
         NewRepository repository = context.createRepository("pmd", "java").setName("PMD");
         // see javadoc of RulesDefinitionXmlLoader for the format
-        final String sonarRulesXmlFile = "/com/jpinpoint/sonar/rules/sonar-pmd-jpinpoint.xml";
+        final String sonarRulesXmlFile = "/com/jpinpoint/sonar/rules/sonar-pmd-jpinpoint-java.xml";
         extractRulesData(repository, sonarRulesXmlFile, "/org/sonar/l10n/pmd/rules/pmd");
 
         repository.done();
